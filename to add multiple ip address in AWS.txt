@@ -1,0 +1,26 @@
+to add multiple ip in instance
+
+step1:
+aws-->instance-->network interface-->manage ip address-->add private ip
+
+
+step2:  
+sudo touch /etc/sysconfig/network-scripts/ifcfg-eth0:1
+
+vim ifcfg-eth0:1
+    DEVICE=eth0:1
+    BOOTPROTO=static
+    NETMASK=255.255.255.0
+    ONBOOT=yes
+    TYPE=Ethernet
+    IPADDR=172.31.34.195
+	
+/etc/init.d/network  restart
+ 
+step3: test that private ip
+ping <private ip>
+ethtool <eth0:1>    eth0:1=>ethernet name
+ 
+ 
+refer this document: https://aws.amazon.com/premiumsupport/knowledge-center/second-eip-centos-rhel-single-eni-ec2/
+       
